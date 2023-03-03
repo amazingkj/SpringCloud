@@ -1,0 +1,5 @@
+C:\amazing\springcloud\gateway-service\src\main\java\com\example\gatewayservice\GatewayServiceApplication.java
+C:\amazing\springcloud\gateway-service\src\main\java\com\example\gatewayservice\filter\CustomFilter.java
+C:\amazing\springcloud\gateway-service\src\main\java\com\example\gatewayservice\filter\LoggingFilter.java
+C:\amazing\springcloud\gateway-service\src\main\java\com\example\gatewayservice\filter\GlobalFilter.java
+C:\amazing\springcloud\gateway-service\src\main\java\com\example\gatewayservice\filter\FilterConfig.java

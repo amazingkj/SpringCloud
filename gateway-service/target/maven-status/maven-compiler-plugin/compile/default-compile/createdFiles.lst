@@ -1,0 +1,8 @@
+com\example\gatewayservice\filter\CustomFilter$Config.class
+com\example\gatewayservice\GatewayServiceApplication.class
+com\example\gatewayservice\filter\CustomFilter.class
+com\example\gatewayservice\filter\GlobalFilter$Config.class
+com\example\gatewayservice\filter\LoggingFilter$Config.class
+com\example\gatewayservice\filter\LoggingFilter.class
+com\example\gatewayservice\filter\GlobalFilter.class
+com\example\gatewayservice\filter\FilterConfig.class
