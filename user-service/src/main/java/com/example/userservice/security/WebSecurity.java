@@ -28,20 +28,23 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     }
 
-
+    //"192.168.0.5","172.27.192.1"
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        //http.authorizeRequests().antMatchers("/users/**").permitAll();
-        http.authorizeRequests().antMatchers("/**")
-                        .hasIpAddress("172.27.192.1") //"192.168.0.5",
-                                .and()
-                                        .addFilter(getAuthenticatonFilter());
+//        http.authorizeRequests().antMatchers("/users/**").permitAll();
+        http.authorizeRequests()
+                .antMatchers("/error/**").permitAll()
+                .antMatchers("/actuator/**").permitAll()
+                .antMatchers("/**")
+                .access("hasIpAddress('172.27.192.1')")
+                .and()
+                .addFilter(getAuthenticationFilter());
 
         http.headers().frameOptions().disable();
     }
 
-    private AuthenticationFilter getAuthenticatonFilter() throws Exception {
+    private AuthenticationFilter getAuthenticationFilter() throws Exception {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager(),userService, env);
         authenticationFilter.setAuthenticationManager(authenticationManager());
         return authenticationFilter;

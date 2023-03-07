@@ -30,7 +30,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private Environment env;
 
     public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService, Environment env) {
-        super(authenticationManager);
+        super.setAuthenticationManager(authenticationManager);
         this.userService = userService;
         this.env = env;
     }
@@ -68,7 +68,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .setSubject(userDetails.getUserId())
                 .setExpiration(new Date(System.currentTimeMillis()+
                         Long.parseLong(env.getProperty("token.expiration_time"))))
-                .signWith(SignatureAlgorithm.ES512, env.getProperty("token.secret")).compact();
+                .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret")).compact();
 
         response.addHeader("token",token);
         response.addHeader("userId",userDetails.getUserId());

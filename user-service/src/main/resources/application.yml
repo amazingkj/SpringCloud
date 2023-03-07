@@ -2,6 +2,13 @@ server:
   port: 0
 
 spring:
+  cloud:
+    bootstrap:
+      enabled: true
+  config:
+    use-legacy-processing: true
+    import:
+      - classpath:/bootstrap.yml
   application:
     name: USER-SERVICE
   h2:
@@ -15,16 +22,15 @@ spring:
       ddl-auto: create-drop
     show-sql: true
     generate-ddl: true
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem/testdb
-  security:
-    oauth2:
-      resourceserver:
-        opaquetoken:
-          client-id:
-#    username: sa
-#    password : 1234
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem/testdb
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
 
 eureka:
   client:
@@ -45,6 +51,11 @@ logging:
 
 
 #토큰 정보 #하루
-token:
-  expiration_time: 86400000
-  secret: user_token
+#token:
+  #expiration_time: 86400000
+  #secret: user_token
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh

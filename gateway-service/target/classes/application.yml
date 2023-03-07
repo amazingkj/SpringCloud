@@ -16,9 +16,15 @@ eureka:
 #    ip-address: ${server.address}
 
 spring:
+  config:
+    use-legacy-processing: true
+    import:
+      - classpath:/bootstrap.yml
   application:
     name: gateway-service
   cloud:
+    bootstrap:
+      enabled: true
     gateway:
       default-filters:
         - name: GlobalFilter
@@ -43,6 +49,14 @@ spring:
             #            - AddRequestHeader=first-request, first-requests-header2
             #            - AddResponseHeader=first-response, first-response-header2
             - CustomFilter
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET, POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>/*),/$\{segment}
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
@@ -93,7 +107,15 @@ spring:
 #            - AddResponseHeader=second-response, second-response-header2
             - name: CustomFilter
             - name: LoggingFilter
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 
-token:
-  secret: user_token
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh
