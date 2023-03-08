@@ -47,7 +47,8 @@ greeting:
 
 logging:
   level:
-    com.example.userservice: DEBUG
+    com.example.userservice.client: DEBUG
+
 
 
 #토큰 정보 #하루
